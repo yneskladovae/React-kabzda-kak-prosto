@@ -10,3 +10,8 @@
     padding: 5px;
     border: 1px solid red;
 }
+
+.items.selected {
+    background: #1ea7fd;
+    color: white;
+}

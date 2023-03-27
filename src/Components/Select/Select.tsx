@@ -22,7 +22,7 @@ export const Select = (props: SelectPropsType) => {
             {
                 active &&
                 <div onClick={toggleItems} className={s.items}>
-                    {props.items.map(i => <div
+                    {props.items.map(i => <div className={s.item }
                         onClick={() => props.onChange(i.value)}>{i.title}
                     </div>)}
                 </div>

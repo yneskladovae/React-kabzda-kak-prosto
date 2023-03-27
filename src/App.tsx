@@ -16,13 +16,13 @@ function App() {
 
     return (
         <div className="App">
-            <PageTitle title={"This is App component"}/>
-            <PageTitle title={"My friends"}/>
+            {/*<PageTitle title={"This is App component"}/>*/}
+            {/*<PageTitle title={"My friends"}/>*/}
             {/*<Accordion titleValue={"Menu 2"} collapsed={collapsedValue} onClick={() => setCollapsedValue(!collapsedValue)} />*/}
             <UncontrolledAccordion titleValue={"Menu"}/>
-            <UncontrolledRating />
-            <Rating value={ratingValue} setRatingValue={setRatingValue}/>
-            <UncontrolledOnOff onChange={setSwitchOn}/>  {switchOn.toString()}
+            {/*<UncontrolledRating />*/}
+            {/*<Rating value={ratingValue} setRatingValue={setRatingValue}/>*/}
+            {/*<UncontrolledOnOff onChange={setSwitchOn}/>  {switchOn.toString()}*/}
         </div>
     );
 }
