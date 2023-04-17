@@ -85,3 +85,24 @@ export const Clock = () => {
         </>
     )
 }
+
+export const Clock2 = () => {
+    const [data, setData] = useState(new Date());
+    const clock = data.toLocaleTimeString()
+
+    useEffect(() => {
+        const timing = setInterval(() => {
+            console.log("setTimeout")
+            setData(new Date())
+        }, 1000)
+        return () => {
+            clearInterval(timing)
+        }
+    }, [data])
+
+    return (
+        <>
+            <span>{clock}</span>
+        </>
+    )
+}
