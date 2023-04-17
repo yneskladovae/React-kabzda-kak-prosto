@@ -75,7 +75,7 @@ export const Clock = () => {
         return () => {
             clearInterval(timing)
         }
-    }, [clock])
+    }, [])
 
     return (
         <>
@@ -98,7 +98,7 @@ export const Clock2 = () => {
         return () => {
             clearInterval(timing)
         }
-    }, [data])
+    }, [])
 
     return (
         <>
