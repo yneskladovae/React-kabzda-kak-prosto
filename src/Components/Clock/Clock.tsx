@@ -1,13 +1,15 @@
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import './Clock.css';
 
-type ClockPropsType = {}
+type ClockPropsType = {
+    mode?: 'digital' | 'analog'
+}
 
 export const Clock = (props: ClockPropsType) => {
     const [date, setData] = useState(new Date())
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-    const seconds = date.getSeconds()
+    // const hours = date.getHours()
+    // const minutes = date.getMinutes()
+    // const seconds = date.getSeconds()
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -19,53 +21,45 @@ export const Clock = (props: ClockPropsType) => {
     }, [])
 
     return (
-        <div className={"clock"}>
-            <span>{hours}:</span>
-            <span>{minutes}:</span>
-            <span>{seconds}</span>
-        </div>
+        <>
+            {props.mode === 'digital'
+                ? <DigitalClockView date={date}/>
+                : <AnalogClockView date={date}/>
+            }
+        </>
     )
 }
 
+type ClockViewPropsType = {
+    date: Date
+}
 
-const Clock2 = () => {
-    const [time, setTime] = useState({
-        hours: new Date().getHours(),
-        minutes: new Date().getMinutes(),
-        seconds: new Date().getSeconds(),
-    });
+export const DigitalClockView: FC<ClockViewPropsType> = ({date}) => {
+    return <div className={"clock"}>
+        <span>{date.getHours()}:</span>
+        <span>{date.getMinutes()}:</span>
+        <span>{date.getSeconds()}</span>
+    </div>
+}
 
-    useEffect(() => {
-        const intervalID = setInterval(() => {
-            setTime({
-                hours: new Date().getHours(),
-                minutes: new Date().getMinutes(),
-                seconds: new Date().getSeconds(),
-            });
-        }, 1000);
-
-        return () => {
-            clearInterval(intervalID);
-        };
-    }, []);
-
-    const hourStyle = {
-        transform: `rotate(${time.hours * 30 + time.minutes / 2}deg)`,
+export const AnalogClockView: FC<ClockViewPropsType> = ({date}) => {
+    const secondsStyle = {
+        transform: `rotate(${date.getSeconds() * 6}deg)`
     };
-    const minuteStyle = {
-        transform: `rotate(${time.minutes * 6}deg)`,
+    const minutesStyle = {
+        transform: `rotate(${date.getMinutes() * 6}deg)`
     };
-    const secondStyle = {
-        transform: `rotate(${time.seconds * 6}deg)`,
+    const hoursStyle = {
+        transform: `rotate(${date.getHours() * 30}deg)`
     };
-
+    
     return (
-        <div className="clock">
-            <div className="hour-hand" style={hourStyle}></div>
-            <div className="minute-hand" style={minuteStyle}></div>
-            <div className="second-hand" style={secondStyle}></div>
+        <div className={"clock"}>
+            <div className={"analog-clock"}>
+                <div className={"dial seconds"} style={secondsStyle}/>
+                <div className={"dial minutes"} style={minutesStyle}/>
+                <div className={"dial hours"} style={hoursStyle}/>
+            </div>
         </div>
-    );
-};
-
-export default Clock2;
+    )
+}
